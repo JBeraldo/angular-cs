@@ -1,0 +1,15 @@
+ion-content{
+  --background: var(--ion-color-tertiary);
+}
+
+#form-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+app-login-form{
+  height: fit-content;
+  width: fit-content;
+}
