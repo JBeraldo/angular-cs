@@ -1,17 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Signal, computed} from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
-  token:Signal<string | null> = computed(()=> localStorage.getItem('token'))
-  header:Signal<HttpHeaders> = computed(() => new HttpHeaders({'authorization': `Bearer ${this.token()}`}))
-
+  logged:BehaviorSubject<string> = new BehaviorSubject<string>('none')
   constructor(private http: HttpClient
-  ) { }
+  ) {}
 
 
   get(partial_url:string, header:HttpHeaders = this.header()): Observable<any>{
@@ -28,5 +26,13 @@ export class CommonService {
 
   buildUrl(partial_url:string): string{
     return `${environment.apiHost}${partial_url}`
+  }
+
+  token(){
+    return localStorage.getItem('token')
+  }
+
+  header(){
+    return new HttpHeaders({'authorization': `Bearer ${this.token()}`})
   }
 }

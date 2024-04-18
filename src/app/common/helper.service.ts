@@ -3,12 +3,15 @@ import { Injectable, Signal, computed} from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { ToastController } from '@ionic/angular';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelperService {
-  constructor(private toast_controller: ToastController
+  constructor(
+    private toast_controller: ToastController,
+    private auth_service: AuthService
   ) { }
 
 
@@ -19,7 +22,13 @@ export class HelperService {
       position: 'top',
       color: color
     });
+  }
 
-    await toast.present();
+  async responseErrors(error:any){
+    if([401,403].includes(error.status))
+    {
+      this.auth_service.kick()
+    }
+    this.toast('danger',error.error.message)
   }
 }

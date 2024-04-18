@@ -117,3 +117,15 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+
+#avatar-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#avatar-img{
+  border-radius: 100%;
+  width: 40%;
+  aspect-ratio: 1;
+}

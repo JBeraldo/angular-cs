@@ -13,21 +13,29 @@ export class AuthService extends CommonService {
   }
 
   login(login_data:any): Observable<any>{
-    return this.post('login',login_data
+    let login_response = this.post('login',login_data
     ,{})
     .pipe(
-      tap((response) => {
-        localStorage.setItem('token',response.token)
-      })
+      tap({next(value) {
+          localStorage.setItem('token',value.token)
+      },})
     )
+
+    this.logged.next('logged')
+
+    return login_response
   }
 
-  logout(): Observable<any>{
-    return this.post('logout',{})
-    .pipe(tap(() => localStorage.removeItem('token')))
+  logout(): void{
+    this.post('logout',{}).subscribe({complete: () => this.logged.next('logout')})
   }
 
-  get isLogged(){
+  get hasToken(){
     return this.token() !== null
+  }
+
+  kick(){
+    localStorage.removeItem('token')
+    this.logged.next('logout')
   }
 }

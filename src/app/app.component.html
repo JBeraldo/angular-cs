@@ -3,7 +3,13 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>[In]</ion-list-header>
+          <ion-list-header>
+            <ion-row style="width: 100%">
+              <ion-col id="avatar-wrapper" size="12">
+                <img id="avatar-img" [src]="avatar()">
+              </ion-col>
+            </ion-row>
+          </ion-list-header>
           <ion-note>Lorem</ion-note>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
@@ -11,11 +17,11 @@
               <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
-            <ion-item lines="none" (click)="logout()" detail="false">
-              <ion-icon aria-hidden="true" slot="start" ios="exit-outline" md="exit-outline"></ion-icon>
-              <ion-label>Sair</ion-label>
-            </ion-item>
           </ion-menu-toggle>
+          <ion-item lines="none" (click)="logout()" detail="false">
+            <ion-icon aria-hidden="true" slot="start" ios="exit-outline" md="exit-outline"></ion-icon>
+            <ion-label>Sair</ion-label>
+          </ion-item>
         </ion-list>
 
       </ion-content>
