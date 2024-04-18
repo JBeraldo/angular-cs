@@ -12,8 +12,8 @@ export class CommonService {
   ) {}
 
 
-  get(partial_url:string, header:HttpHeaders = this.header()): Observable<any>{
-    return this.http.get(
+  get<T>(partial_url:string, header:HttpHeaders = this.header()): Observable<any>{
+    return this.http.get<T>(
       this.buildUrl(partial_url),{headers: header}
     )
   }
