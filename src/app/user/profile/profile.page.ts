@@ -1,11 +1,10 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../auth/auth.service';
 import { MenuController } from '@ionic/angular';
 import { UserService } from '../user.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HelperService } from 'src/app/common/helper.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, first, Observable, Subscription} from 'rxjs';
 import { User } from '../user';
 
 @Component({
@@ -13,14 +12,13 @@ import { User } from '../user';
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage implements OnInit,OnDestroy {
+export class ProfilePage implements OnInit,OnDestroy{
   public profile!: string;
-  public user$:BehaviorSubject<User|null>;
   private activatedRoute = inject(ActivatedRoute);
   public user_form:FormGroup;
-
+  public user$:Observable<User|null>;
+  public userChanges$:Subscription = new Subscription();
   constructor(
-    private authService: AuthService,
     private menu_controller: MenuController,
     private user_service: UserService,
     private helper_service: HelperService
@@ -38,16 +36,16 @@ export class ProfilePage implements OnInit,OnDestroy {
     this.get()
   }
   ngOnDestroy(): void {
-      this.user$.unsubscribe();
+    this.userChanges$.unsubscribe()
   }
 
   get(){
-    this.user$.subscribe({
+    this.userChanges$ = this.user$.subscribe({
       next: (user) => {
         this.user_form.controls['nome'].setValue(user?.nome)
         this.user_form.controls['email'].setValue(user?.email)
       },
-      error: (err) => this.helper_service.responseErrors(err)
+      error: (error) => this.helper_service.handleError(error)
     })
     this.user_service.getUser()
   }

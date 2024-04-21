@@ -1,5 +1,10 @@
 <ion-content [fullscreen]="true">
   <div id="form-wrapper">
-    <app-login-form></app-login-form>
+    @if((currentPage | async) === 'login'){
+      <app-login-form (pageChange)="changePage($event)"></app-login-form>
+    }
+    @else {
+      <app-register-form (pageChange)="changePage($event)"></app-register-form>
+    }
   </div>
 </ion-content>

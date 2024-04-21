@@ -2,12 +2,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Signal, computed} from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from '../user/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
-  logged:BehaviorSubject<string> = new BehaviorSubject<string>('none')
   constructor(private http: HttpClient
   ) {}
 
@@ -18,8 +18,8 @@ export class CommonService {
     )
   }
 
-  post(partial_url:string,data:any, header:any = this.header()): Observable<any>{
-    return this.http.post(
+  post<T>(partial_url:string,data:any, header:any = this.header()): Observable<any>{
+    return this.http.post<T>(
       this.buildUrl(partial_url),data,{headers: header}
     )
   }

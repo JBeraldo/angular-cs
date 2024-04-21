@@ -9,8 +9,11 @@ import { firstValueFrom } from 'rxjs';
 })
 export class AuthGuard {
 
+  private logged = 'none'
+
   constructor(public auth: AuthService,private user_service:UserService, public router: Router) {
-    this.auth.logged.subscribe({next: (value)=> {
+    this.auth.logged$.subscribe({next: (value)=> {
+      this.logged = value
       if(value == 'logout'){
         localStorage.removeItem('token')
         this.router.navigateByUrl('/Login')
@@ -23,9 +26,12 @@ export class AuthGuard {
       this.router.navigate(['Login']);
       return false;
     }
-
-    if(this.auth.logged.getValue() == 'none' && this.auth.hasToken){
-      firstValueFrom(this.user_service.getUser()).catch(
+    if(this.logged == 'none' && this.auth.hasToken){
+      firstValueFrom(this.user_service.getUser()).then(
+        (user)=>{
+          this.auth.setLogged()
+          this.user_service.setUser(user)
+        },
         ()=> {
         this.router.navigate(['Login']);
         localStorage.removeItem('token')

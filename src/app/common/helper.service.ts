@@ -22,13 +22,20 @@ export class HelperService {
       position: 'top',
       color: color
     });
+
+    await toast.present()
   }
 
-  async responseErrors(error:any){
+  async handleError(error:any){
+    this.toast('danger',error.error.mensagem)
     if([401,403].includes(error.status))
     {
       this.auth_service.kick()
     }
-    this.toast('danger',error.error.message)
+  }
+
+  async handleMessage(data:any){
+    this.toast('success',data.mensagem
+    )
   }
 }

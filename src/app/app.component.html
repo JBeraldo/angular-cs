@@ -10,18 +10,18 @@
               </ion-col>
             </ion-row>
           </ion-list-header>
-          <ion-note>Lorem</ion-note>
+          <ion-note class="fw-700 fs-1-2">{{ (user$ | async )?.nome }}</ion-note>
 
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index;let last = last">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
+            <ion-item *ngIf="last" lines="none" (click)="logout()" detail="false">
+              <ion-icon aria-hidden="true" slot="start" ios="exit-outline" md="exit-outline"></ion-icon>
+              <ion-label>Sair</ion-label>
+            </ion-item>
           </ion-menu-toggle>
-          <ion-item lines="none" (click)="logout()" detail="false">
-            <ion-icon aria-hidden="true" slot="start" ios="exit-outline" md="exit-outline"></ion-icon>
-            <ion-label>Sair</ion-label>
-          </ion-item>
         </ion-list>
 
       </ion-content>

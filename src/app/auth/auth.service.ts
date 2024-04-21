@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { CommonService } from 'src/app/common/common.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService extends CommonService {
+  private logged:BehaviorSubject<string> = new BehaviorSubject<string>('none')
+  logged$:Observable<string> = this.logged.asObservable()
 
   constructor(http: HttpClient) {
     super(http);
@@ -26,8 +28,12 @@ export class AuthService extends CommonService {
     return login_response
   }
 
-  logout(): void{
-    this.post('logout',{}).subscribe({complete: () => this.logged.next('logout')})
+  logout(): Observable<any>{
+    let logout_response = this.post('logout',{})
+
+    this.logged.next('logout')
+
+    return logout_response
   }
 
   get hasToken(){
@@ -36,6 +42,14 @@ export class AuthService extends CommonService {
 
   kick(){
     localStorage.removeItem('token')
+    this.logged.next('logout')
+  }
+
+  setLogged(){
+    this.logged.next('logged')
+  }
+
+  setLogout(){
     this.logged.next('logout')
   }
 }

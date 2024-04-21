@@ -1,0 +1,31 @@
+<ion-card mode="ios">
+  <ion-card-content>
+    <form [formGroup]="register_form">
+      <ion-row>
+        <ion-col size="12">
+          <ion-input label="Nome" color="primary" mode="md" label-placement="floating" fill="outline" formControlName="nome" placeholder="Nome"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input label="Email" color="primary" mode="md" label-placement="floating" fill="outline" formControlName="email" placeholder="Email"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input label="Senha" color="primary" type="password" mode="md" label-placement="floating" fill="outline" formControlName="senha" placeholder="Senha"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-segment style="height: 3rem;" color="primary" [ngModel]="type" [ngModelOptions]="{standalone: true}">
+            <ion-segment-button value="candidate">
+              <ion-label>Sou candidato</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="company">
+              <ion-label>Sou empresa</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+          <ion-label class="fw-700 fs-0-9 pointer" (click)="toLogin()" color="primary">Já tenho conta</ion-label>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button type="submit" color="primary" fill="solid" shape="round" expand="block" (click)="register()">Registrar</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-card-content>
+</ion-card>
