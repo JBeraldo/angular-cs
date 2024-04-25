@@ -12,7 +12,7 @@
           <ion-input label="Senha" color="primary" type="password" mode="md" label-placement="floating" fill="outline" formControlName="senha" placeholder="Senha"></ion-input>
         </ion-col>
         <ion-col size="12">
-          <ion-segment style="height: 3rem;" color="primary" [ngModel]="type" [ngModelOptions]="{standalone: true}">
+          <ion-segment style="height: 3rem;" color="primary" [ngModel]="type | async" (ngModelChange)="type.next($event)" [ngModelOptions]="{standalone: true}">
             <ion-segment-button value="candidate">
               <ion-label>Sou candidato</ion-label>
             </ion-segment-button>
@@ -22,6 +22,16 @@
           </ion-segment>
           <ion-label class="fw-700 fs-0-9 pointer" (click)="toLogin()" color="primary">Já tenho conta</ion-label>
         </ion-col>
+        @if ((type | async) !== 'candidate') {
+          <ion-col size="12">
+            <ion-input label="Ramo" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
+              formControlName="ramo" placeholder="Ramo"></ion-input>
+          </ion-col>
+          <ion-col size="12">
+            <ion-textarea label="Descrição" color="primary" rows="10" colums="10" type="text" mode="md" label-placement="floating" fill="outline"
+              formControlName="descricao" placeholder="Descrição"></ion-textarea>
+          </ion-col>
+        }
         <ion-col size="12">
           <ion-button type="submit" color="primary" fill="solid" shape="round" expand="block" (click)="register()">Registrar</ion-button>
         </ion-col>

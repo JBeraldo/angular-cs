@@ -46,7 +46,7 @@ export class ProfileCompanyPage implements OnInit,OnDestroy{
       next: (user) => {
         this.user_form.controls['nome'].setValue(user?.nome)
         this.user_form.controls['email'].setValue(user?.email)
-        this.user_form.controls['ramo'].setValue(user?.email)
+        this.user_form.controls['ramo'].setValue(user?.ramo)
         this.user_form.controls['descricao'].setValue(user?.descricao)
       },
       error: (error) => this.helper_service.handleError(error)
