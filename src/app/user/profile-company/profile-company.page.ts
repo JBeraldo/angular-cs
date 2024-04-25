@@ -8,11 +8,11 @@ import { BehaviorSubject, first, Observable, Subscription} from 'rxjs';
 import { User } from '../user';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  selector: 'app-company-profile',
+  templateUrl: './profile-company.page.html',
+  styleUrls: ['./profile-company.page.scss'],
 })
-export class ProfilePage implements OnInit,OnDestroy{
+export class ProfileCompanyPage implements OnInit,OnDestroy{
   public profile!: string;
   private activatedRoute = inject(ActivatedRoute);
   public user_form:FormGroup;
@@ -26,7 +26,9 @@ export class ProfilePage implements OnInit,OnDestroy{
     this.user$ = user_service.user$
     this.user_form = new FormGroup({
       email: new FormControl(''),
-      nome: new FormControl('')
+      nome: new FormControl(''),
+      ramo: new FormControl(''),
+      descricao: new FormControl('')
     })
   }
 
@@ -44,6 +46,8 @@ export class ProfilePage implements OnInit,OnDestroy{
       next: (user) => {
         this.user_form.controls['nome'].setValue(user?.nome)
         this.user_form.controls['email'].setValue(user?.email)
+        this.user_form.controls['ramo'].setValue(user?.email)
+        this.user_form.controls['descricao'].setValue(user?.descricao)
       },
       error: (error) => this.helper_service.handleError(error)
     })

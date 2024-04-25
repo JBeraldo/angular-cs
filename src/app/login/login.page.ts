@@ -1,6 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
+import { Component, OnDestroy} from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,7 +8,6 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnDestroy {
-  private activatedRoute = inject(ActivatedRoute);
   public currentPage:BehaviorSubject<string> = new BehaviorSubject<string>('login')
   constructor(
     private menu_controller: MenuController
@@ -25,7 +22,6 @@ export class LoginPage implements OnDestroy {
   }
 
   changePage(page:string){
-    console.log(page)
     this.currentPage.next(page)
   }
 }

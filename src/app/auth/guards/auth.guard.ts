@@ -28,9 +28,8 @@ export class AuthGuard {
     }
     if(this.logged == 'none' && this.auth.hasToken){
       firstValueFrom(this.user_service.getUser()).then(
-        (user)=>{
+        ()=>{
           this.auth.setLogged()
-          this.user_service.setUser(user)
         },
         ()=> {
         this.router.navigate(['Login']);

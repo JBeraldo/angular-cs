@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ProfilePage } from './profile.page';
+import { ProfileCandidatePage } from './profile-candidate.page';
 
 @NgModule({
   imports: [
@@ -13,6 +13,6 @@ import { ProfilePage } from './profile.page';
     IonicModule,
     ReactiveFormsModule
   ],
-  declarations: [ProfilePage]
+  declarations: [ProfileCandidatePage]
 })
-export class ProfilePageModule {}
+export class ProfileCandidatePageModule {}

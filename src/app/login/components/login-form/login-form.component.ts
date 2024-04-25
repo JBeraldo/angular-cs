@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { HelperService } from 'src/app/common/helper.service';
 import { UserService } from 'src/app/user/user.service';
@@ -28,8 +29,8 @@ export class LoginForm {
 
   login(){
     this.auth_service.login(this.login_form.value).subscribe({
-      next: (user) => {
-        this.user_service.setUser(user)
+      next: async () => {
+        await firstValueFrom(this.user_service.getUser())
         this.router.navigateByUrl('/Dashboard')
       },
       error: () => this.helper_service.toast('danger','Credenciais Incorretas')

@@ -1,21 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { CommonService } from 'src/app/common/common.service';
-import { User } from './user';
+import { User, UserData } from './user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService extends CommonService {
-  public user:BehaviorSubject<User|null> = new BehaviorSubject<User|null>(null)
-  public user$:Observable<User | null> = this.user.asObservable()
+  public user:BehaviorSubject<User> = new BehaviorSubject<User>(new User({} as UserData))
+  public user$:Observable<User> = this.user.asObservable()
   constructor(http: HttpClient) {
     super(http);
   }
 
   getUser(): Observable<any>{
-    return this.get<User>('usuario')
+    return this.get<User>('usuario').pipe(map(user => new User(user)),tap(user=> this.setUser(user)))
+  }
+
+  getUserValue(): User{
+    return this.user.getValue();
   }
 
   setUser(user:User){
