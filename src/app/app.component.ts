@@ -10,8 +10,8 @@ import { UserService } from './user/user.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit,OnDestroy{
-  public avatar_imgs: Array<string> = ['assets/images/gato_joia.jpg','assets/images/gato_fodasse.jpg']
-  public avatar:Signal<string> = computed(()=> this.avatar_imgs[Math.round(Math.random())])
+  public avatar_imgs: Array<string> = ['assets/images/gato_joia.jpg']
+  public avatar:Signal<string> = computed(()=> this.avatar_imgs[0])
 
   public user$:Observable<User | null>
   public appPages:Subject<Array<any>> = new Subject<Array<any>>
@@ -43,7 +43,6 @@ export class AppComponent implements OnInit,OnDestroy{
   }
 
   resolveAppPages(user:User){
-    console.log(user)
     if(user.tipo === "empresa"){
       this.appPages.next([
         { title: 'Dashboard', url: '/Dashboard', icon: 'mail' },

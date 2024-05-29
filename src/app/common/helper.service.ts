@@ -27,7 +27,8 @@ export class HelperService {
   }
 
   async handleError(error:any){
-    this.toast('danger',error.error.mensagem)
+    console.error(error)
+    this.toast('danger',error.mensagem)
     if([401,403].includes(error.status))
     {
       this.auth_service.kick()

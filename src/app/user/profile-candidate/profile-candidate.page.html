@@ -8,20 +8,103 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card mode="ios">
-    <ion-card-content>
-      <form [formGroup]="user_form">
-        <ion-row>
-          <ion-col size="6">
-            <ion-input label="Nome" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
-              formControlName="nome" placeholder="Senha"></ion-input>
-          </ion-col>
-          <ion-col size="6">
-            <ion-input label="Email" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
-              formControlName="email" placeholder="Senha"></ion-input>
-          </ion-col>
-        </ion-row>
-      </form>
-    </ion-card-content>
-  </ion-card>
+<form [formGroup]="user_form">
+  <ion-row>
+    <ion-col size="12">
+      <ion-card mode="ios">
+        <ion-card-content>
+            <ion-row>
+              <ion-col size="4">
+                <ion-input label="Nome" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
+                  formControlName="nome" placeholder="Senha"></ion-input>
+              </ion-col>
+              <ion-col size="4">
+                <ion-input label="Email" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
+                  formControlName="email" placeholder="Senha"></ion-input>
+              </ion-col>
+              <ion-col size="4">
+                <ion-input label="Senha" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
+                formControlName="senha" placeholder="Preencha para alterar"></ion-input>
+              </ion-col>
+            </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="2">
+      <ion-button (click)="addExperience()">Adicionar Experiencia</ion-button>
+    </ion-col>
+    <ng-container formArrayName="experiencia" fr>
+      @for (xp of user_experiences.controls; track $index) {
+        <ion-col size="12" [formGroupName]="$index">
+          <ion-card mode="ios">
+            <ion-card-header>
+              Experiencia #{{$index}}
+            </ion-card-header>
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="12" size-md="6">
+                    <ion-item>
+                      <ion-input label="Nome Empresa" formControlName="nome_empresa"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="12" size-md="6">
+                    <ion-item>
+                      <ion-input label="Data inicio" formControlName="inicio"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="12" size-md="6">
+                    <ion-item>
+                      <ion-input label="Data Fim" formControlName="fim"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="12" size-md="6">
+                    <ion-item>
+                      <ion-input label="Cargo" formControlName="cargo"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="12">
+                    <ion-button expand="full" shape="round" color="danger" (click)="removeExperience($index)">Remover</ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      }
+    </ng-container>
+    <ion-col size="12">
+      <ion-card mode="ios">
+        <ion-card-content>
+          <ion-list mode="ios">
+            <ion-list-header>
+              Competências
+            </ion-list-header>
+            @for (skill of (skills$ | async); track $index) {
+              <ion-item (click)="toggleSkill(skill)">
+                <ion-checkbox checked="{{userHasSkill(skill.id)}}"  slot="start"></ion-checkbox>
+                <span>
+                  {{skill.nome}}
+                </span>
+              </ion-item>
+            }
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+
+    <ion-col size="2">
+      <ion-button color="success" (click)="update()">Atualizar</ion-button>
+    </ion-col>
+    <ion-col size="1">
+      <ion-button color="danger" (click)="delete()">Excluir</ion-button>
+    </ion-col>
+  </ion-row>
+</form>
+
 </ion-content>

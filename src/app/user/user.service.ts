@@ -8,7 +8,7 @@ import { User, UserData } from './user';
   providedIn: 'root'
 })
 export class UserService extends CommonService {
-  public user:BehaviorSubject<User> = new BehaviorSubject<User>(new User({} as UserData))
+  private user:BehaviorSubject<User> = new BehaviorSubject<User>(new User({} as UserData))
   public user$:Observable<User> = this.user.asObservable()
   constructor(http: HttpClient) {
     super(http);
@@ -27,9 +27,15 @@ export class UserService extends CommonService {
   }
 
   storeCandidate(user_data:User): Observable<any>{
-    return this.post<User>('usuarios/candidato',user_data,{})
+    return this.post<User>('usuarios/candidatos',user_data,{})
   }
   storeCompany(user_data:User): Observable<any>{
     return this.post<User>('usuarios/empresa',user_data,{})
+  }
+  updateUser(user_data:User): Observable<any>{
+    return this.put<User>('usuario',user_data)
+  }
+  deleteUser(): Observable<any>{
+    return this.delete('usuario')
   }
 }

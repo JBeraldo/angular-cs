@@ -12,27 +12,39 @@ export class CommonService {
   ) {}
 
 
-  get<T>(partial_url:string, header:HttpHeaders = this.header()): Observable<any>{
+  protected get<T>(partial_url:string, header:HttpHeaders = this.header()): Observable<any>{
     return this.http.get<T>(
       this.buildUrl(partial_url),{headers: header}
     )
   }
 
-  post<T>(partial_url:string,data:any, header:any = this.header()): Observable<any>{
+  protected post<T>(partial_url:string,data:any, header:any = this.header()): Observable<any>{
     return this.http.post<T>(
       this.buildUrl(partial_url),data,{headers: header}
     )
   }
 
-  buildUrl(partial_url:string): string{
+  protected put<T>(partial_url:string,data:any, header:any = this.header()): Observable<any>{
+    return this.http.put<T>(
+      this.buildUrl(partial_url),data,{headers: header}
+    )
+  }
+
+  protected delete<T>(partial_url:string,header:any = this.header()): Observable<any>{
+    return this.http.delete<T>(
+      this.buildUrl(partial_url),{headers: header}
+    )
+  }
+
+  protected buildUrl(partial_url:string): string{
     return `${environment.apiHost}${partial_url}`
   }
 
-  token(){
+  protected token(){
     return localStorage.getItem('token')
   }
 
-  header(){
+  protected header(){
     return new HttpHeaders({'authorization': `Bearer ${this.token()}`})
   }
 }
