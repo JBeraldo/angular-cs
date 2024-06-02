@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { CommonService } from 'src/app/common/common.service';
+import { Md5 } from 'ts-md5';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService extends CommonService {
   }
 
   login(login_data:any): Observable<any>{
+    login_data.senha = Md5.hashStr(login_data.senha)
     let login_response = this.post('login',login_data
     ,{})
     .pipe(

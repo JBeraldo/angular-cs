@@ -30,7 +30,7 @@
         </ion-card-content>
       </ion-card>
     </ion-col>
-    <ion-col size="2">
+    <ion-col style="padding-left: 20px;" size="12">
       <ion-button (click)="addExperience()">Adicionar Experiencia</ion-button>
     </ion-col>
     <ng-container formArrayName="experiencia" fr>
@@ -44,26 +44,18 @@
               <ion-grid>
                 <ion-row>
                   <ion-col size="12" size-md="6">
-                    <ion-item>
-                      <ion-input label="Nome Empresa" formControlName="nome_empresa"></ion-input>
-                    </ion-item>
+                      <ion-input label="Nome Empresa" color="primary" type="text" mode="md" label-placement="floating" fill="outline" formControlName="nome_empresa"></ion-input>
                   </ion-col>
                   <ion-col size="12" size-md="6">
-                    <ion-item>
-                      <ion-input label="Data inicio" formControlName="inicio"></ion-input>
-                    </ion-item>
+                      <ion-input label="Data inicio" color="primary" type="text" mode="md" label-placement="floating" fill="outline" formControlName="inicio"></ion-input>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col size="12" size-md="6">
-                    <ion-item>
-                      <ion-input label="Data Fim" formControlName="fim"></ion-input>
-                    </ion-item>
+                      <ion-input label="Data Fim" color="primary" type="text" mode="md" label-placement="floating" fill="outline" formControlName="fim"></ion-input>
                   </ion-col>
                   <ion-col size="12" size-md="6">
-                    <ion-item>
-                      <ion-input label="Cargo" formControlName="cargo"></ion-input>
-                    </ion-item>
+                      <ion-input label="Cargo" color="primary" type="text" mode="md" label-placement="floating" fill="outline" formControlName="cargo"></ion-input>
                   </ion-col>
                 </ion-row>
                 <ion-row>
@@ -96,12 +88,8 @@
         </ion-card-content>
       </ion-card>
     </ion-col>
-
-
-    <ion-col size="2">
+    <ion-col style="padding-left: 20px;" size="12">
       <ion-button color="success" (click)="update()">Atualizar</ion-button>
-    </ion-col>
-    <ion-col size="1">
       <ion-button color="danger" (click)="delete()">Excluir</ion-button>
     </ion-col>
   </ion-row>

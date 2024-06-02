@@ -2,7 +2,7 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { UserService } from '../user.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HelperService } from 'src/app/common/helper.service';
 import { BehaviorSubject, first, Observable, Subject, Subscription, takeUntil, tap} from 'rxjs';
 import { User } from '../user';
@@ -29,7 +29,7 @@ export class ProfileCompanyPage implements OnInit,OnDestroy{
     this.user_form = new FormGroup({
       email: new FormControl(''),
       nome: new FormControl(''),
-      senha: new FormControl(null),
+      senha: new FormControl(null,Validators.minLength(8)),
       ramo: new FormControl(''),
       descricao: new FormControl('')
     })
@@ -59,6 +59,9 @@ export class ProfileCompanyPage implements OnInit,OnDestroy{
   }
 
   update(){
+    if(!this.user_form.valid){
+      return
+    }
     this.user_service.updateUser(this.user_form.value).subscribe({next: () => {
       this.user_service.getUser().subscribe();
     }})

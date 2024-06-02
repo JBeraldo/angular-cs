@@ -36,7 +36,7 @@ export class ProfileCandidatePage implements OnInit,OnDestroy{
     this.user_form = new FormGroup({
       email: new FormControl(''),
       nome: new FormControl(''),
-      senha: new FormControl(null),
+      senha: new FormControl(null,Validators.minLength(8)),
       competencias: new FormArray([]),
       experiencia: new FormArray([])
     })
@@ -91,6 +91,9 @@ export class ProfileCandidatePage implements OnInit,OnDestroy{
   }
 
   update(){
+    if(!this.user_form.valid){
+      return
+    }
     this.user_service.updateUser(this.user_form.value).subscribe({next: () => {
       this.user_service.getUser().subscribe();
     }})

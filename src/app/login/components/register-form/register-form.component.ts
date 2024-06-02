@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { HelperService } from 'src/app/common/helper.service';
@@ -26,7 +26,7 @@ export class RegisterForm implements OnInit,OnDestroy{
     this.register_form = new FormGroup({
       nome:  new FormControl(''),
       email: new FormControl(''),
-      senha: new FormControl('')
+      senha: new FormControl(null,Validators.minLength(8))
     })
   }
 
@@ -54,6 +54,9 @@ export class RegisterForm implements OnInit,OnDestroy{
   }
 
   register(){
+    if(!this.register_form.valid){
+      return
+    }
     let observable$
     if(this.type.getValue() === 'candidate'){
       observable$ = this.user_service.storeCandidate(this.register_form.value)

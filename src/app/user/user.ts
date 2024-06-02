@@ -9,6 +9,7 @@ export interface UserData{
   descricao:string
   competencias: Array<SkillData>
   experiencia: Array<ExperienceData>
+  senha:string
 }
 export class User {
   nome: string
@@ -18,6 +19,7 @@ export class User {
   descricao:string
   competencias: Array<Skill>
   experiencia: Array<Experience>
+  senha:string | null
 
   constructor(data:UserData){
     this.nome = data?.nome || ''
@@ -27,5 +29,6 @@ export class User {
     this.tipo = data?.tipo || 'usuario'
     this.competencias = data?.competencias || []
     this.experiencia = data?.experiencia || []
+    this.senha = null
   }
 }

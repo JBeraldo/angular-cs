@@ -1,7 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, Signal, computed} from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Injectable} from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from '../auth/auth.service';
 
@@ -27,7 +24,6 @@ export class HelperService {
   }
 
   async handleError(error:any){
-    console.error(error)
     this.toast('danger',error.mensagem)
     if([401,403].includes(error.status))
     {
@@ -36,7 +32,6 @@ export class HelperService {
   }
 
   async handleMessage(data:any){
-    this.toast('success',data.mensagem
-    )
+    this.toast('success',data.mensagem)
   }
 }

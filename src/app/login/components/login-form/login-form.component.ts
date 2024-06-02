@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output} from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -23,11 +23,15 @@ export class LoginForm {
   ) {
     this.login_form = new FormGroup({
       email: new FormControl(''),
-      senha: new FormControl('')
+      senha: new FormControl('',Validators.minLength(8))
     })
   }
 
   login(){
+    if(!this.login_form.valid){
+      return
+    }
+
     this.auth_service.login(this.login_form.value).subscribe({
       next: async () => {
         await firstValueFrom(this.user_service.getUser())
