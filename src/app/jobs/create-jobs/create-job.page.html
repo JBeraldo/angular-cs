@@ -1,0 +1,73 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<form [formGroup]="job_form">
+  <ion-row>
+    <ion-col size="12">
+      <ion-card mode="ios">
+        <ion-card-content>
+            <ion-row>
+              <ion-col size="10">
+                <ion-input label="Título" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
+                  formControlName="titulo" placeholder="Título"></ion-input>
+              </ion-col>
+              <ion-col size="2">
+                <ion-toggle label="Título" color="primary" formControlName="ativo"></ion-toggle>
+              </ion-col>
+              <ion-col size="6">
+                <ion-input label="Salário Minímo" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
+                  formControlName="salario_min" placeholder="Min. Salário"></ion-input>
+              </ion-col>
+              <ion-col size="6">
+                <ion-input label="Salário Máximo" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
+                  formControlName="salario_max" placeholder="Max. Salário"></ion-input>
+              </ion-col>
+              <ion-col size="6">
+                <ion-input label="RAMO" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
+                  formControlName="ramo_id" placeholder="Min. Salário"></ion-input>
+              </ion-col>
+              <ion-col size="6">
+                <ion-input label="Experiência(Anos)" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
+                  formControlName="experiencia" placeholder="Expêriencia"></ion-input>
+              </ion-col>
+              <ion-col size="12">
+                <ion-textarea label="Descrição" color="primary" rows="20" type="text" mode="md" label-placement="floating" fill="outline"
+                  formControlName="descrição" placeholder="Descrição"></ion-textarea>
+              </ion-col>
+            </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="12">
+      <ion-card mode="ios">
+        <ion-card-content>
+          <ion-list mode="ios">
+            <ion-list-header>
+              Competências
+            </ion-list-header>
+            @for (skill of (skills$ | async); track $index) {
+              <ion-item (click)="toggleSkill(skill)">
+                <ion-checkbox checked="{{userHasSkill(skill.id)}}"  slot="start"></ion-checkbox>
+                <span>
+                  {{skill.nome}}
+                </span>
+              </ion-item>
+            }
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col style="padding-left: 20px;" size="12">
+      <ion-button color="success" (click)="store()">Atualizar</ion-button>
+    </ion-col>
+  </ion-row>
+</form>
+
+</ion-content>
