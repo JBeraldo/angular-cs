@@ -25,7 +25,7 @@ const routes: Routes = [
   {
     path: 'Job',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./jobs/job.module').then( m => m.JobModule)
+    loadChildren: () => import('./job/job.module').then( m => m.JobModule)
   },
 ];
 

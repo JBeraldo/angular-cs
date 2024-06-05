@@ -7,6 +7,8 @@ import { Observable, Subject, takeUntil} from 'rxjs';
 import { SkillService } from 'src/app/skill/skill.service';
 import { Skill, SkillData } from 'src/app/skill/skill';
 import { JobService } from '../job.service';
+import { JobSectorService } from 'src/app/job-sector/job-sector.service';
+import { JobSector } from 'src/app/job-sector/job-sector';
 
 @Component({
   selector: 'app-create-job',
@@ -18,14 +20,17 @@ export class CreateJobPage implements OnInit,OnDestroy{
   private activatedRoute = inject(ActivatedRoute);
   public job_form:FormGroup;
   public skills$:Observable<Array<Skill>>
+  public job_sectors$:Observable<Array<JobSector>>
   private ngUnsubscribe = new Subject<void>();
   constructor(
     private menu_controller: MenuController,
     private job_service: JobService,
     private skills_service: SkillService,
+    private job_sector_service: JobSectorService,
     private helper_service: HelperService,
   ) {
     this.skills$ = skills_service.skills$
+    this.job_sectors$ = job_sector_service.job_sectors$
     this.job_form = new FormGroup({
       titulo: new FormControl(''),
       descrição: new FormControl(''),
@@ -42,6 +47,8 @@ export class CreateJobPage implements OnInit,OnDestroy{
     this.profile = this.activatedRoute.snapshot.paramMap.get('id') as string;
     this.menu_controller.enable(true)
     this.skills_service.getSkills().subscribe()
+    this.job_sector_service.getJobSectors().subscribe()
+    this.job_service.getJobs().subscribe()
   }
 
   ngOnDestroy(): void {

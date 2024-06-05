@@ -23,4 +23,8 @@ export class JobService extends CommonService {
   deleteJob(job_id:Number): Observable<any>{
     return this.delete(`vagas/${job_id}`)
   }
+
+  getJobs(): Observable<any>{
+    return this.get<Array<JobData>>(`vagas`)
+  }
 }

@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row>
+    @for (job of jobs; track $index) {
+      <ion-col size="3">
+        <ion-card>
+          <ion-card-header>
+            {{job.titulo}}
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    }
+    <ion-col size="3">
+      <ion-card color="primary"  (click)="createJob()">
+        <ion-card-header>
+          Adicionar Vaga
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

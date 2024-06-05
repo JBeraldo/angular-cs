@@ -47,7 +47,7 @@ export class AppComponent implements OnInit,OnDestroy{
       this.appPages.next([
         { title: 'Dashboard', url: '/Dashboard', icon: 'mail' },
         { title: 'Perfil', url: '/User/Company', icon: 'person' },
-        { title: 'Vagas', url: '/Job/Store', icon: 'construct' },
+        { title: 'Vagas', url: '/Job/List', icon: 'construct' },
       ])
     }
     else{

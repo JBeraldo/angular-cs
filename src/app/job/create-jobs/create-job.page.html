@@ -22,19 +22,22 @@
                 <ion-toggle label="Título" color="primary" formControlName="ativo"></ion-toggle>
               </ion-col>
               <ion-col size="6">
-                <ion-input label="Salário Minímo" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
+                <ion-input label="Salário Minímo" color="primary" type="number" mode="md" label-placement="floating" fill="outline"
                   formControlName="salario_min" placeholder="Min. Salário"></ion-input>
               </ion-col>
               <ion-col size="6">
-                <ion-input label="Salário Máximo" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
+                <ion-input label="Salário Máximo" color="primary" type="number" mode="md" label-placement="floating" fill="outline"
                   formControlName="salario_max" placeholder="Max. Salário"></ion-input>
               </ion-col>
               <ion-col size="6">
-                <ion-input label="RAMO" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
-                  formControlName="ramo_id" placeholder="Min. Salário"></ion-input>
+                <ion-select label="Ramo"  formControlName="ramo_id" label-placement="floating">
+                  @for (sector of (job_sectors$ | async); track $index) {
+                    <ion-select-option [value]="sector.id">{{sector.nome}}</ion-select-option>
+                  }
+                </ion-select>
               </ion-col>
               <ion-col size="6">
-                <ion-input label="Experiência(Anos)" color="primary" type="text" mode="md" label-placement="floating" fill="outline"
+                <ion-input label="Experiência(Anos)" color="primary" type="number" mode="md" label-placement="floating" fill="outline"
                   formControlName="experiencia" placeholder="Expêriencia"></ion-input>
               </ion-col>
               <ion-col size="12">
