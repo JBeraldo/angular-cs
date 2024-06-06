@@ -36,4 +36,7 @@ export class ListJobsPage implements OnInit,OnDestroy{
   createJob(){
     this.router.navigateByUrl('/Job/Store')
   }
+  updateJob(id:number){
+    this.router.navigate(['/Job/Update',id])
+  }
 }

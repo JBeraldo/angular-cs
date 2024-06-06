@@ -5,7 +5,7 @@ export interface JobData{
   id:number
   ramo_id:string
   titulo:string
-  descrição:string
+  descricao:string
   competencias:Array<SkillData>
   experiencia:number
   salario_min:number
@@ -17,7 +17,7 @@ export class Job {
   id:number
   ramo_id:string
   titulo:string
-  descrição:string
+  descricao:string
   competencias:Array<SkillData>
   experiencia:number
   salario_min:number
@@ -28,7 +28,7 @@ export class Job {
     this.id = data.id
     this.ramo_id = data.ramo_id
     this.titulo = data.titulo
-    this.descrição = data.descrição
+    this.descricao = data.descricao
     this.competencias = data.competencias
     this.experiencia = data.experiencia
     this.salario_min = data.salario_min

@@ -1,16 +1,16 @@
 export interface JobSectorData{
     id:number
     nome:string
-    descrição:string
+    descricao:string
 }
 export class JobSector{
     id:number
     nome:string
-    descrição:string
+    descricao:string
 
     constructor(data: JobSectorData){
         this.id = data.id
         this.nome = data.nome
-        this.descrição = data.descrição
+        this.descricao = data.descricao
     }
 }

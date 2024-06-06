@@ -8,6 +8,8 @@ import { CreateJobPage } from './create-jobs/create-job.page';
 import { CreateJobPageModule } from './create-jobs/create-job.module';
 import { ListJobsPage } from './list-jobs/list-jobs.page';
 import { ListJobsPageModule } from './list-jobs/list-jobs.module';
+import { UpdateJobPageModule } from './update-job/update-job.module';
+import { UpdateJobPage } from './update-job/update-job.page';
 
 
 const routes: Routes = [
@@ -18,6 +20,10 @@ const routes: Routes = [
   {
     path: 'List',
     component: ListJobsPage
+  },
+  {
+    path: 'Update/:id',
+    component: UpdateJobPage
   }
 ];
 
@@ -28,6 +34,7 @@ const routes: Routes = [
     IonicModule,
     CreateJobPageModule,
     ListJobsPageModule,
+    UpdateJobPageModule,
     RouterModule.forChild(routes)
   ],
 })

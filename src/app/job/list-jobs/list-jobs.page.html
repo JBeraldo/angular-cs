@@ -11,7 +11,7 @@
   <ion-row>
     @for (job of jobs; track $index) {
       <ion-col size="3">
-        <ion-card>
+        <ion-card (click)="updateJob(job.id)">
           <ion-card-header>
             {{job.titulo}}
           </ion-card-header>
