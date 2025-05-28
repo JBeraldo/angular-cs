@@ -29,19 +29,19 @@ export class UserService extends CommonService {
 
   storeCandidate(user_data:User): Observable<any>{
     if(user_data.senha != null){
-      user_data.senha = Md5.hashStr(user_data.senha)
+      user_data.senha = user_data.senha
     }
     return this.post<User>('usuarios/candidatos',user_data,{})
   }
   storeCompany(user_data:User): Observable<any>{
     if(user_data.senha != null){
-      user_data.senha = Md5.hashStr(user_data.senha)
+      user_data.senha = user_data.senha
     }
     return this.post<User>('usuarios/empresa',user_data,{})
   }
   updateUser(user_data:UserData): Observable<any>{
     if(user_data.senha != null){
-      user_data.senha = Md5.hashStr(user_data.senha)
+      user_data.senha = user_data.senha
     }
     return this.put<User>('usuario',user_data)
   }

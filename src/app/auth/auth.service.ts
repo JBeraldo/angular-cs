@@ -16,7 +16,7 @@ export class AuthService extends CommonService {
   }
 
   login(login_data:any): Observable<any>{
-    login_data.senha = Md5.hashStr(login_data.senha)
+    login_data.senha = login_data.senha
     let login_response = this.post('login',login_data
     ,{})
     .pipe(
